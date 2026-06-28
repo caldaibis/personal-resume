@@ -17,5 +17,6 @@ Personal resume site. The resume is structured data rendered to both a web page 
 - `npm run build:pdf` — build site + regenerate PDF (run after editing resume content)
 
 ## Deploy
-- Vercel uses `vercel.json` `buildCommand` (installs chromium, builds, makes PDF, rebuilds so the PDF lands in `dist`).
-- `.github/workflows/deploy.yml` validates the build + PDF generation on every PR.
+- Vercel runs `npm run build` only (per `vercel.json`). It does NOT generate the PDF — the Vercel build image lacks Chromium's system libs.
+- `public/resume.pdf` is generated locally via `npm run build:pdf` and committed; Astro copies it into `dist`, so Vercel serves it as a static asset. Regenerate + commit it whenever resume content changes.
+- `.github/workflows/deploy.yml` validates the build + PDF generation on every PR (Actions supports `playwright install --with-deps`).

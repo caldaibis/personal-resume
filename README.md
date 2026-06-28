@@ -38,9 +38,19 @@ If a required field is missing or malformed, the build fails — not the page.
 - Print/PDF behavior: the `@media print` rules in the same file
 - Layout: `src/pages/index.astro`
 
+## The PDF
+
+`public/resume.pdf` is generated from the live page (`npm run build:pdf`) and
+**committed to the repo**. Regenerate and commit it whenever you change the
+resume — `git` then tracks the PDF alongside the source.
+
+> Why committed instead of built on deploy? Vercel's build image lacks the system
+> libraries headless Chromium needs, so the PDF is generated locally (or in CI,
+> see `.github/workflows/deploy.yml`) and served as a static asset.
+
 ## Deploy
 
 1. Push to GitHub.
-2. Import the repo in Vercel (framework auto-detected as Astro).
-3. Vercel runs the build in `vercel.json`, which installs Chromium and regenerates
-   the PDF on every deploy, so `/resume.pdf` always matches the live site.
+2. Import the repo in Vercel (framework auto-detected as Astro; `vercel.json`
+   runs `npm run build`).
+3. Vercel serves the site and the committed `/resume.pdf`. Every push redeploys.
