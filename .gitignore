@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# generated PDF (built in CI; uncomment to keep out of git)
+# public/resume.pdf
+
+# logs
+npm-debug.log*
+*.log
+
+# environment
+.env
+.env.production
+
+# editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json

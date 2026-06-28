@@ -1,0 +1,205 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { resume } from '../data/resume';
+
+// Signature device: emphasise quantified results (percentages, "40+") inline.
+const highlight = (s: string) =>
+  s.replace(/(~?\d+(?:\.\d+)?%|\b\d+\+)/g, '<span class="metric">$1</span>');
+---
+
+<Base>
+  <main class="mx-auto max-w-3xl px-5 py-10 sm:py-16">
+    <article
+      class="page overflow-hidden rounded-lg border-t-[3px] border-accent bg-paper shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_40px_-12px_rgba(0,0,0,0.12)] ring-1 ring-line"
+    >
+      <div class="p-8 sm:p-12">
+        <!-- Header -->
+        <header>
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h1 class="font-display text-4xl font-bold leading-none tracking-tight sm:text-[3.25rem]">
+                {resume.name}
+              </h1>
+              <p class="mt-3 font-mono text-sm font-medium uppercase tracking-[0.22em] text-accent">
+                {resume.title}
+              </p>
+            </div>
+            <a
+              href="/resume.pdf"
+              class="no-print inline-flex w-fit shrink-0 items-center gap-2 border border-ink px-3.5 py-2 font-mono text-xs font-medium tracking-wide text-ink transition-colors hover:bg-ink hover:text-paper"
+            >
+              ↓ resume.pdf
+            </a>
+          </div>
+
+          <p class="mt-6 max-w-prose leading-relaxed text-ink/85" set:html={highlight(resume.summary)} />
+
+          <!-- Contact / links -->
+          <ul class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-muted">
+            {resume.location && <li>{resume.location}</li>}
+            <li aria-hidden="true" class="text-line">/</li>
+            <li>
+              <a class="text-ink transition-colors hover:text-accent" href={`mailto:${resume.email}`}>
+                {resume.email}
+              </a>
+            </li>
+            {resume.links.map((link) => (
+              <>
+                <li aria-hidden="true" class="text-line">/</li>
+                <li>
+                  <a class="text-ink transition-colors hover:text-accent" href={link.url} target="_blank" rel="noopener">
+                    {link.label}
+                  </a>
+                </li>
+              </>
+            ))}
+          </ul>
+        </header>
+
+        <!-- Experience -->
+        {resume.experience.length > 0 && (
+          <Section title="Experience">
+            <div>
+              {resume.experience.map((job) => (
+                <div class="relative border-l border-line pb-8 pl-7 last:pb-0">
+                  <span
+                    class="absolute top-1.5 left-[-5px] h-2.5 w-2.5 rounded-full border-2 border-accent bg-paper"
+                  ></span>
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+                    <h3 class="font-display text-lg font-semibold leading-snug">
+                      {job.role} <span class="text-muted">at</span>{' '}
+                      <span class="text-accent">{job.company}</span>
+                    </h3>
+                    <span class="font-mono text-xs whitespace-nowrap text-muted">
+                      {job.start} – {job.end}
+                    </span>
+                  </div>
+                  {job.location && (
+                    <p class="mt-0.5 font-mono text-[11px] text-muted">{job.location}</p>
+                  )}
+                  {job.summary && (
+                    <p class="mt-2.5 text-sm leading-relaxed text-ink/85" set:html={highlight(job.summary)} />
+                  )}
+                  {job.highlights.length > 0 && (
+                    <ul class="mt-2.5 space-y-1.5">
+                      {job.highlights.map((h) => (
+                        <li class="relative pl-4 text-sm leading-relaxed text-ink/85">
+                          <span class="absolute top-[0.55em] left-0 h-1 w-1 rounded-full bg-accent"></span>
+                          <span set:html={highlight(h)} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {job.tech.length > 0 && (
+                    <p class="mt-3 font-mono text-[11px] tracking-wide text-muted">
+                      {job.tech.join('  ·  ')}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        <!-- Skills -->
+        {resume.skills.length > 0 && (
+          <Section title="Skills">
+            <dl class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              {resume.skills.map((s) => (
+                <div class="grid grid-cols-[8rem_1fr] gap-x-3 sm:block">
+                  <dt class="font-mono text-[11px] font-medium uppercase tracking-wider text-accent sm:mb-1">
+                    {s.group}
+                  </dt>
+                  <dd class="font-mono text-[12px] leading-relaxed text-ink/80">
+                    {s.items.join('  ·  ')}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Section>
+        )}
+
+        <!-- Personal Projects -->
+        {resume.projects.length > 0 && (
+          <Section title="Personal Projects">
+            <div class="space-y-5">
+              {resume.projects.map((p) => (
+                <div>
+                  <h3 class="font-display text-base font-semibold leading-snug">
+                    {p.url ? (
+                      <a
+                        class="text-ink decoration-accent/40 decoration-2 underline-offset-4 transition-colors hover:text-accent hover:underline"
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {p.name}
+                        <span class="ml-1 align-text-top font-mono text-[10px] text-muted">↗</span>
+                      </a>
+                    ) : (
+                      p.name
+                    )}
+                  </h3>
+                  <p class="mt-1 text-sm leading-relaxed text-ink/85" set:html={highlight(p.description)} />
+                  {p.tech.length > 0 && (
+                    <p class="mt-1.5 font-mono text-[11px] tracking-wide text-muted">
+                      {p.tech.join('  ·  ')}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        <!-- Education -->
+        {resume.education.length > 0 && (
+          <Section title="Education">
+            <div class="space-y-4">
+              {resume.education.map((e) => (
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                  <div class="flex-1 basis-72">
+                    <h3 class="font-display text-base font-semibold leading-snug">{e.institution}</h3>
+                    <p class="text-sm text-ink/85">{e.degree}</p>
+                    {e.details && <p class="mt-1 text-xs leading-relaxed text-muted">{e.details}</p>}
+                  </div>
+                  <span class="font-mono text-xs whitespace-nowrap text-muted">
+                    {e.start ? `${e.start} – ` : ''}{e.end}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        <!-- Certifications -->
+        {resume.certifications.length > 0 && (
+          <Section title="Certifications">
+            <ul class="space-y-2">
+              {resume.certifications.map((c) => (
+                <li class="flex flex-wrap items-baseline justify-between gap-x-3">
+                  <span class="text-sm">
+                    {c.url ? (
+                      <a class="font-medium text-accent hover:underline" href={c.url} target="_blank" rel="noopener">
+                        {c.name}
+                      </a>
+                    ) : (
+                      <span class="font-medium text-ink">{c.name}</span>
+                    )}
+                    <span class="text-muted"> · {c.issuer}</span>
+                  </span>
+                  <span class="font-mono text-xs text-muted">{c.year}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+      </div>
+    </article>
+
+    <footer class="no-print mt-6 text-center font-mono text-[11px] tracking-wide text-muted">
+      Typed, schema-validated, and rendered with Astro · source on GitHub
+    </footer>
+  </main>
+</Base>
