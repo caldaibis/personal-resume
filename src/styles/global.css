@@ -1,39 +1,40 @@
 @import 'tailwindcss';
 
 /* ── Design tokens ──────────────────────────────────────────────
-   Palette: ink on warm paper with a single terracotta accent
-   (carried over from Collin's original LaTeX CV identity).
+   Palette: deep blue ink on a cool, softly green-tinted paper with a
+   restrained teal accent.
    Type: Bricolage Grotesque (display) / Inter (body) / JetBrains Mono (data). */
 @theme {
   --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 
-  --color-canvas: #f4f2ed;
-  --color-paper: #fdfcfa;
-  --color-ink: #211d1a;
-  --color-muted: #78716c;
-  --color-line: #e7e2da;
-  --color-accent: #b24013;
-  --color-accent-tint: #f6e8e1;
+  --color-canvas: #e8f0f1;
+  --color-paper: #f8fbfb;
+  --color-ink: #17313c;
+  --color-muted: #5e747d;
+  --color-line: #d5e3e5;
+  --color-accent: #1a6d80;
+  --color-accent-tint: #dcedf0;
 }
 
 /* Dark mode = flip the token values; every utility cascades automatically. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-canvas: #100e0b;
-    --color-paper: #1a1714;
-    --color-ink: #ece7e0;
-    --color-muted: #a8a29e;
-    --color-line: #2c2722;
-    --color-accent: #e0683a;
-    --color-accent-tint: #2a1a12;
+    --color-canvas: #0c171c;
+    --color-paper: #112228;
+    --color-ink: #e8f0f2;
+    --color-muted: #a7bec5;
+    --color-line: #23404a;
+    --color-accent: #52b3c0;
+    --color-accent-tint: #11363e;
   }
 }
 
 html {
   scroll-behavior: smooth;
   background: var(--color-canvas);
+  font-size: 14.5px;
 }
 
 body {
@@ -57,14 +58,25 @@ body {
 /* ── Print / PDF ────────────────────────────────────────────────
    Playwright emulates print media; native "Save as PDF" matches. */
 @media print {
+  @page {
+    margin: 0;
+    background: var(--color-paper);
+  }
+
   .no-print {
     display: none !important;
   }
   html,
   body {
-    background: #fff !important;
+    background: var(--color-paper) !important;
+  }
+  main {
+    margin: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
   }
   .page {
+    background: var(--color-paper) !important;
     box-shadow: none !important;
     margin: 0 !important;
     max-width: none !important;

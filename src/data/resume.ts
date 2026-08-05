@@ -15,62 +15,31 @@ const data: Resume = {
     { label: 'GitHub', url: 'https://github.com/caldaibis' },
     { label: 'LinkedIn', url: 'https://linkedin.com/in/caldaibis' },
   ],
-  skills: [
-    {
-      group: 'Languages',
-      items: ['Python', 'TypeScript', 'C#', 'C/C++', 'PHP', 'R', 'Haskell'],
-    },
-    {
-      group: 'ML & Data Science',
-      items: [
-        'PyTorch',
-        'PyTorch Lightning',
-        'NLP & GenAI',
-        'LLMs & RAG',
-        'Vector databases',
-        'Deep RL (PPO, A2C, TD3)',
-        'Classical ML',
-      ],
-    },
-    {
-      group: 'Web & Backend',
-      items: ['React', 'Angular', 'FastAPI', 'Flask', 'Laravel', 'Symfony', 'Vue.js'],
-    },
-    {
-      group: 'Cloud & DevOps',
-      items: ['Azure', 'GCP', 'Docker', 'Terraform', 'Bazel', 'CI/CD', 'MLOps', 'Linux'],
-    },
-    {
-      group: 'Data',
-      items: ['PostgreSQL', 'MySQL'],
-    },
-  ],
   experience: [
     {
       company: 'Netherlands Forensic Institute (NFI)',
       role: 'Machine Learning Engineer',
       location: 'The Hague, Netherlands',
-      start: 'Oct 2024',
-      end: 'Present',
+      start: '2024',
+      end: 'Aug 2026',
       summary:
-        'Building forensic AI within a 40+ person data science guild, leading the engineering and LLM work across Scrum projects with the police, the Hansken team, and the biological and chemical data labs.',
+        'Building forensic AI in varying R&D projects, leading the engineering and LLM work in collaboration with the police, the Hansken team, and the biological and chemical data labs.',
       highlights: [
         'Fine-tuned Whisper for Dutch forensic audio (ethnolects, dialects, and low-quality recordings), cutting word error rate from ~40% to ~15% on private forensic datasets and teaching it previously unseen slang.',
+        'Initiated and supervised a master’s thesis on fine-tuning Whisper for new vocabulary using text-only data, without requiring corresponding audio recordings.',
         'Pre-trained a Dutch ModernBERT from scratch on Dutch FineWeb / FineWeb-Edu to close a gap in open-source Dutch encoder models with a modern BERT/RoBERTa successor.',
-        'Built and evaluated the Hansken Copilot RAG application, helping investigators search cases of millions of digital traces, fully on-prem with local embedding models and LLMs (case data may never leave the NFI), evaluated with RAGAS on hand-curated forensic datasets.',
-        'Benchmarked Dutch LLMs (GPT-NL, Mistral, Gemma, Qwen) with SURF & TNO; contributed the first Dutch bias benchmark to EuroEval and built a fine-tuning/eval pipeline for a forensic text-classification use case to assess whether GPT-NL could outperform existing models.',
+        'Built and evaluated the Hansken Copilot RAG application, helping investigators search cases of millions of digital traces, fully on-prem with local embedding models and LLMs, evaluated with RAGAS on hand-curated forensic datasets.',
+        'Benchmarked LLMs (GPT-NL, Mistral, Gemma, Qwen) with SURF & TNO; contributed the first Dutch bias benchmark to EuroEval and built a fine-tuning/eval pipeline for a forensic text-classification use case to assess whether GPT-NL could outperform existing models.',
         'Established local LLM infrastructure for running and fine-tuning models on sensitive data (llama.cpp, Unsloth, Hugging Face, PyTorch), including sandboxed local coding agents and optimised training runs on NVIDIA H200s.',
-        'Founded and chaired the Python Dev Club and LLM Club to raise engineering and LLM literacy across the guild (modern tooling like Ruff and uv/pdm, plus safe local agents), and advised NFI leadership on rolling out LLM technology organisation-wide.',
+        'Founded and chaired the Python Dev Club and LLM Club to raise engineering and LLM literacy across the guild (modern tooling like Ruff and uv, plus safe local agents), and advised NFI leadership on rolling out LLM technology organisation-wide.',
       ],
       tech: [
         'Python',
         'PyTorch',
-        'Hugging Face',
+        'HF datasets, TRL, transformers',
         'Unsloth',
         'llama.cpp',
-        'RAG',
-        'RAGAS',
-        'NVIDIA H200',
+        'Streamlit',
       ],
     },
     {
@@ -122,18 +91,6 @@ const data: Resume = {
         'CI/CD',
       ],
     },
-    {
-      company: 'Yard (Digital Agency)',
-      role: 'Full-Stack Software Engineer (0.4 FTE)',
-      location: 'Utrecht, Netherlands',
-      start: '2018',
-      end: '2020',
-      highlights: [
-        'Built full-stack web applications alongside university studies.',
-        'Engaged directly with clients to understand and deliver on business objectives.',
-      ],
-      tech: ['Symfony (PHP)', 'Vue.js', 'Nginx', 'Docker', 'Linux', 'Git'],
-    },
   ],
   projects: [
     {
@@ -146,23 +103,16 @@ const data: Resume = {
     {
       name: 'Speechless: Whisper Vocabulary Adaptation',
       description:
-        'Research pipeline adapting Whisper to out-of-vocabulary terms (e.g. Dutch medical vocabulary) without training on real audio: a single-codebook residual VQ over frozen Whisper encoder states and a GPT-2-style decoder mapping text to RVQ token sequences. Reproduces and extends the Speechless (2025) methodology.',
+        'Exploratory research on adapting Whisper to out-of-vocabulary terms (e.g. Dutch medical vocabulary) without training on real audio: a single-codebook residual VQ over frozen Whisper encoder states and a GPT-2-style decoder mapping text to RVQ token sequences. Reproduces and extends the Speechless (2025) methodology.',
       url: 'https://github.com/caldaibis/speechless',
-      tech: ['Python', 'PyTorch', 'Whisper', 'Residual VQ', 'ASR'],
+      tech: ['Python', 'PyTorch', 'Whisper', 'ASR'],
     },
     {
-      name: 'Autonomous Browser Agent',
+      name: 'Fully Autonomous Agent for Rental Applications',
       description:
         'End-to-end agentic automation: triggered by incoming email, it opens a target listing, extracts metadata, and hands off to a browser agent that navigates third-party sites, writes a tailored message from a template, fills the application form, uploads documents, and submits, fully autonomously.',
       url: 'https://github.com/caldaibis/browser-agent',
-      tech: ['Python', 'LLM agents', 'Browser automation'],
-    },
-    {
-      name: 'Multi-Agent RL for Probability Updating Games',
-      description:
-        'Research codebase behind my MSc thesis: implements general-sum probability updating games as OpenAI Gym environments and applies PPO and other policy-gradient methods (Ray RLlib + Ray Tune) to empirically converge to Nash equilibria.',
-      url: 'https://github.com/caldaibis/probability-updating-games-marl',
-      tech: ['Python', 'Ray RLlib', 'Ray Tune', 'OpenAI Gym', 'PPO'],
+      tech: ['Python', 'Langchain Deep Agents', 'Playwright'],
     },
   ],
   education: [

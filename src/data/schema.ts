@@ -51,7 +51,6 @@ export const resumeSchema = z.object({
   location: z.string().optional(),
   email: z.string().email(),
   links: z.array(linkSchema).default([]),
-  skills: z.array(z.object({ group: z.string(), items: z.array(z.string()) })).default([]),
   experience: z.array(experienceSchema).default([]),
   projects: z.array(projectSchema).default([]),
   education: z.array(educationSchema).default([]),
