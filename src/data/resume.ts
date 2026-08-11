@@ -6,9 +6,9 @@ import { resumeSchema, type Resume } from './schema';
  */
 const data: Resume = {
   name: 'Collin Aldaibis',
-  title: 'AI Engineer',
+  title: 'Freelance AI & Software Engineer',
   summary:
-    'AI engineer with an MSc in Computing Science. I build production AI systems end to end, from training and fine-tuning language models to the web apps and infrastructure that ship them, and enjoy working directly with stakeholders to turn business goals into working software.',
+    'Freelance AI and software engineer with an MSc in Computing Science and 5+ years of experience taking user-facing systems from research and model development through deployment and production support. I combine hands-on ML and LLM work with full-stack engineering, cloud infrastructure, and close collaboration with stakeholders and domain experts.',
   location: 'Utrecht, Netherlands',
   email: 'caldaibis@gmail.com',
   links: [
@@ -23,13 +23,12 @@ const data: Resume = {
       start: '2024',
       end: 'Aug 2026',
       summary:
-        'Building forensic AI in varying R&D projects, leading the engineering and LLM work in collaboration with the police, the Hansken team, and the biological and chemical data labs.',
+        'Led the engineering and LLM work across forensic AI R&D projects with the police, the Hansken team, and the biological and chemical data labs.',
       highlights: [
-        'Fine-tuned Whisper for Dutch forensic audio (ethnolects, dialects, and low-quality recordings), cutting word error rate from ~40% to ~15% on private forensic datasets and teaching it previously unseen slang.',
-        'Initiated and supervised a master’s thesis on fine-tuning Whisper for new vocabulary using text-only data, without requiring corresponding audio recordings.',
+        'Fine-tuned Whisper for Dutch forensic audio (ethnolects, dialects, and low-quality recordings), cutting word error rate from ~40% to ~15% on private datasets; initiated and supervised a master’s thesis on adapting its vocabulary using text-only data.',
         'Pre-trained a Dutch ModernBERT from scratch on Dutch FineWeb / FineWeb-Edu to close a gap in open-source Dutch encoder models with a modern BERT/RoBERTa successor.',
         'Built and evaluated the Hansken Copilot RAG application, helping investigators search cases of millions of digital traces, fully on-prem with local embedding models and LLMs, evaluated with RAGAS on hand-curated forensic datasets.',
-        'Benchmarked LLMs (GPT-NL, Mistral, Gemma, Qwen) with SURF & TNO; contributed the first Dutch bias benchmark to EuroEval and built a fine-tuning/eval pipeline for a forensic text-classification use case to assess whether GPT-NL could outperform existing models.',
+        'Benchmarked LLMs with SURF & TNO, contributed the first Dutch bias benchmark to EuroEval, and built a reproducible fine-tuning and evaluation pipeline for forensic text classification.',
         'Established local LLM infrastructure for running and fine-tuning models on sensitive data (llama.cpp, Unsloth, Hugging Face, PyTorch), including sandboxed local coding agents and optimised training runs on NVIDIA H200s.',
         'Founded and chaired the Python Dev Club and LLM Club to raise engineering and LLM literacy across the guild (modern tooling like Ruff and uv, plus safe local agents), and advised NFI leadership on rolling out LLM technology organisation-wide.',
       ],
@@ -49,11 +48,10 @@ const data: Resume = {
       start: '2023',
       end: '2024',
       summary:
-        "Built the company's core AI product, giving clinicians and patients seamless access to AI-powered ECG diagnostics.",
+        "Developed the company's core AI diagnostics platform, connecting ECG models to clinician- and patient-facing workflows.",
       highlights: [
-        'Developed the diagnostics platform end to end, from model serving to clinician-facing UI.',
+        'Built the platform end to end, from Python/PyTorch model serving and C# services to the React interface and Azure infrastructure managed with Docker and Terraform.',
         'Supervised several international AI master’s students on deep learning for ECG research theses.',
-        'Organised company events and team activities.',
       ],
       tech: [
         'C#',
@@ -68,21 +66,25 @@ const data: Resume = {
       ],
     },
     {
-      company: 'Schiphol (via Incentro)',
+      company: 'Schiphol / Cargonaut (via Incentro)',
       role: 'Software & Machine Learning Engineer',
       location: 'Amsterdam, Netherlands',
       start: '2022',
       end: '2023',
       summary:
-        'Delivered ML and full-stack applications for Schiphol as a consultant, owning the relationship with the customer.',
+        'Recovered and operated Cargonaut’s Automatic Nomination matching system, assigning inbound shipments to the correct freight forwarder from noisy Air Waybill and station-declaration addresses for 50+ users.',
       highlights: [
-        'Built and maintained a Flask ML service, a Laravel backend, and an Angular frontend.',
-        'Worked directly with stakeholders at Schiphol to translate business objectives into delivered software.',
-        'Applied NLP techniques, word embeddings, and LLMs to production use cases.',
+        'Owned the live system across a Flask ML service, Laravel/MySQL backend, and Angular frontend; diagnosed severe quality defects while keeping the operational workflow running.',
+        'Improved matching across misspellings, inconsistent writing, and outdated addresses by evaluating approaches ranging from Levenshtein and vocabulary-based fuzzy matching to FastText semantic models and LLM-assisted matching.',
+        'Built a live active-learning loop in which corrections from users became training feedback, incrementally improving predictions on real freight data.',
+        'Released improvements weekly through test, staging, acceptance, and production; owned critical incident response and out-of-hours recovery during severe failures.',
+        'Stabilised a pivotal application that remains in use, restored customer confidence, and received Incentro’s “Brandblusser van het Jaar” award for turning around the live system and strengthening the Schiphol relationship.',
       ],
       tech: [
         'Python',
         'Flask',
+        'FastText',
+        'Active learning',
         'Laravel (PHP)',
         'Angular (TypeScript)',
         'GCP',
@@ -91,28 +93,55 @@ const data: Resume = {
         'CI/CD',
       ],
     },
+    {
+      company: 'Yard (Digital Agency)',
+      role: 'Full-Stack Software Engineer (0.4 FTE)',
+      location: 'Utrecht, Netherlands',
+      start: '2018',
+      end: '2020',
+      summary: 'Built and maintained production web applications for agency clients alongside university studies.',
+      highlights: [
+        'Owned customer-reported bugs end to end: proactively clarified requirements with clients, diagnosed the issue, implemented and tested the fix, and delivered it to production.',
+        'Developed features and fixes across Symfony backends, Vue frontends, and Nginx/Docker/Linux deployments.',
+      ],
+      tech: ['Symfony (PHP)', 'Vue.js', 'Nginx', 'Docker', 'Linux', 'Git'],
+    },
+  ],
+  skills: [
+    {
+      group: 'Languages',
+      items: ['Python', 'SQL', 'TypeScript', 'C#', 'PHP'],
+    },
+    {
+      group: 'AI & Data',
+      items: ['PyTorch', 'Hugging Face', 'LLMs & RAG', 'NLP', 'Model evaluation', 'Active learning'],
+    },
+    {
+      group: 'Software & Cloud',
+      items: ['React', 'Angular', 'Flask', 'Docker', 'Terraform', 'CI/CD', 'GCP', 'Azure', 'Linux'],
+    },
   ],
   projects: [
     {
+      name: 'Operated Rental-Application Browser Agent',
+      description:
+        'Built and operate an email-triggered browser agent used by a small group of real users to submit rental applications on third-party sites. It extracts listing data, writes tailored messages, uploads documents, and completes the browser flow end to end.',
+      url: 'https://github.com/caldaibis/browser-agent',
+      tech: ['Python', 'LangChain Deep Agents', 'Playwright'],
+    },
+    {
       name: 'Aparecium: Agentic LLM Benchmark Extraction',
       description:
-        'A multi-stage agentic pipeline that extracts AI model benchmark scores from official model pages, model cards, and benchmark charts: web search, content/table parsing, OCR on chart images, LLM-based extraction, and resolution against a canonical benchmark catalog, evaluated against ground truth. Includes a self-improving agent that diagnoses recurring failure modes, applies targeted fixes, and re-validates, plus a frontend for exploring and comparing results.',
+        'Built an evaluated multi-stage agentic pipeline that extracts benchmark scores from official pages, tables, and chart images using web search, parsing, OCR, and LLM extraction. Includes canonical resolution, automated failure diagnosis, re-validation, and an exploration frontend.',
       url: 'https://github.com/caldaibis/project-aparecium',
       tech: ['Python', 'LLM agents', 'OCR', 'TypeScript', 'uv'],
     },
     {
       name: 'Speechless: Whisper Vocabulary Adaptation',
       description:
-        'Exploratory research on adapting Whisper to out-of-vocabulary terms (e.g. Dutch medical vocabulary) without training on real audio: a single-codebook residual VQ over frozen Whisper encoder states and a GPT-2-style decoder mapping text to RVQ token sequences. Reproduces and extends the Speechless (2025) methodology.',
+        'Research implementation for adapting Whisper to unseen vocabulary without paired audio, using residual VQ over frozen encoder states and a GPT-2-style decoder. Reproduces and extends the Speechless (2025) method for Dutch medical terms.',
       url: 'https://github.com/caldaibis/speechless',
       tech: ['Python', 'PyTorch', 'Whisper', 'ASR'],
-    },
-    {
-      name: 'Fully Autonomous Agent for Rental Applications',
-      description:
-        'End-to-end agentic automation: triggered by incoming email, it opens a target listing, extracts metadata, and hands off to a browser agent that navigates third-party sites, writes a tailored message from a template, fills the application form, uploads documents, and submits, fully autonomously.',
-      url: 'https://github.com/caldaibis/browser-agent',
-      tech: ['Python', 'Langchain Deep Agents', 'Playwright'],
     },
   ],
   education: [
@@ -129,8 +158,6 @@ const data: Resume = {
       degree: 'BSc, Computing Science',
       start: '2015',
       end: '2018',
-      details:
-        'Coursework: algorithmics, optimisation, concurrency, security, graphics, computational intelligence, functional programming.',
     },
   ],
   certifications: [

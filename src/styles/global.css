@@ -43,12 +43,16 @@ body {
   color: var(--color-ink);
 }
 
+.print-only {
+  display: none;
+}
+
 ::selection {
   background: var(--color-accent);
   color: #fff;
 }
 
-/* Inline metric emphasis — the page's signature device. */
+/* Inline metric emphasis: the page's signature device. */
 .metric {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -66,9 +70,15 @@ body {
   .no-print {
     display: none !important;
   }
+  .print-only {
+    display: block !important;
+  }
   html,
   body {
     background: var(--color-paper) !important;
+  }
+  html {
+    font-size: 12px;
   }
   main {
     margin: 0 !important;
@@ -81,6 +91,38 @@ body {
     margin: 0 !important;
     max-width: none !important;
     border-radius: 0 !important;
+  }
+  .resume-title {
+    letter-spacing: 0 !important;
+  }
+  section {
+    margin-top: 1.25rem !important;
+  }
+  section > :first-child {
+    margin-bottom: 0.625rem !important;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+  .experience-continuation {
+    margin-top: 0 !important;
+    padding-top: 1rem;
+    break-before: page;
+    page-break-before: always;
+  }
+  .experience-item {
+    padding-bottom: 1.25rem !important;
+  }
+  .project-item + .project-item,
+  .education-item + .education-item {
+    margin-top: 0.625rem !important;
+  }
+  .experience-item,
+  .project-item,
+  .education-item,
+  .certification-item,
+  .skills-grid {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
   }
   a {
     color: inherit !important;

@@ -1,11 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
 import Section from '../components/Section.astro';
+import SkillsSection from '../components/SkillsSection.astro';
 import { resume } from '../data/resume';
 
 // Signature device: emphasise quantified results (percentages, "40+") inline.
 const highlight = (s: string) =>
   s.replace(/(~?\d+(?:\.\d+)?%|\b\d+\+)/g, '<span class="metric">$1</span>');
+
+// Keep the PDF's two pages structurally separate so experience entries never
+// split or leave an orphaned technology line during print pagination.
+const firstPageExperience = resume.experience.slice(0, 2);
+const continuedExperience = resume.experience.slice(2);
 ---
 
 <Base>
@@ -21,7 +28,7 @@ const highlight = (s: string) =>
               <h1 class="font-display text-4xl font-bold leading-none tracking-tight sm:text-[3.25rem]">
                 {resume.name}
               </h1>
-              <p class="mt-3 font-mono text-sm font-medium uppercase tracking-[0.22em] text-accent">
+              <p class="resume-title mt-3 font-mono text-sm font-medium uppercase tracking-[0.22em] text-accent">
                 {resume.title}
               </p>
             </div>
@@ -60,54 +67,31 @@ const highlight = (s: string) =>
         <!-- Experience -->
         {resume.experience.length > 0 && (
           <Section title="Experience">
-            <div>
-              {resume.experience.map((job) => (
-                <div class="relative border-l border-line pb-8 pl-7 last:pb-0">
-                  <span
-                    class="absolute top-1.5 left-[-5px] h-2.5 w-2.5 rounded-full border-2 border-accent bg-paper"
-                  ></span>
-                  <div class="flex flex-wrap items-baseline justify-between gap-x-3">
-                    <h3 class="font-display text-lg font-semibold leading-snug">
-                      {job.role} <span class="text-muted">at</span>{' '}
-                      <span class="text-accent">{job.company}</span>
-                    </h3>
-                    <span class="font-mono text-xs whitespace-nowrap text-muted">
-                      {job.start} – {job.end}
-                    </span>
-                  </div>
-                  {job.location && (
-                    <p class="mt-0.5 font-mono text-[11px] text-muted">{job.location}</p>
-                  )}
-                  {job.summary && (
-                    <p class="mt-2.5 text-sm leading-relaxed text-ink/85" set:html={highlight(job.summary)} />
-                  )}
-                  {job.highlights.length > 0 && (
-                    <ul class="mt-2.5 space-y-1.5">
-                      {job.highlights.map((h) => (
-                        <li class="relative pl-4 text-sm leading-relaxed text-ink/85">
-                          <span class="absolute top-[0.55em] left-0 h-1 w-1 rounded-full bg-accent"></span>
-                          <span set:html={highlight(h)} />
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {job.tech.length > 0 && (
-                    <p class="mt-3 font-mono text-[11px] tracking-wide text-muted">
-                      {job.tech.join('  ·  ')}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+            {firstPageExperience.map((job) => <ExperienceItem job={job} />)}
           </Section>
         )}
 
-        <!-- Personal Projects -->
+        <div class="print-only">
+          <SkillsSection skills={resume.skills} />
+        </div>
+
+        {continuedExperience.length > 0 && (
+          <section class="experience-continuation">
+            {continuedExperience.map((job) => <ExperienceItem job={job} />)}
+          </section>
+        )}
+
+        <!-- Skills -->
+        <div class="no-print">
+          <SkillsSection skills={resume.skills} />
+        </div>
+
+        <!-- Selected Projects -->
         {resume.projects.length > 0 && (
-          <Section title="Personal Projects">
+          <Section title="Selected Projects">
             <div class="space-y-5">
               {resume.projects.map((p) => (
-                <div>
+                <div class="project-item">
                   <h3 class="font-display text-base font-semibold leading-snug">
                     {p.url ? (
                       <a
@@ -140,7 +124,7 @@ const highlight = (s: string) =>
           <Section title="Education">
             <div class="space-y-4">
               {resume.education.map((e) => (
-                <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <div class="education-item flex flex-wrap items-baseline justify-between gap-x-4">
                   <div class="flex-1 basis-72">
                     <h3 class="font-display text-base font-semibold leading-snug">{e.institution}</h3>
                     <p class="text-sm text-ink/85">{e.degree}</p>
@@ -160,7 +144,7 @@ const highlight = (s: string) =>
           <Section title="Certifications">
             <ul class="space-y-2">
               {resume.certifications.map((c) => (
-                <li class="flex flex-wrap items-baseline justify-between gap-x-3">
+                <li class="certification-item flex flex-wrap items-baseline justify-between gap-x-3">
                   <span class="text-sm">
                     {c.url ? (
                       <a class="font-medium text-accent hover:underline" href={c.url} target="_blank" rel="noopener">

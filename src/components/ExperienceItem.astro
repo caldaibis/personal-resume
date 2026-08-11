@@ -1,0 +1,45 @@
+---
+import type { Resume } from '../data/schema';
+
+interface Props {
+  job: Resume['experience'][number];
+}
+
+const { job } = Astro.props;
+const highlight = (value: string) =>
+  value.replace(/(~?\d+(?:\.\d+)?%|\b\d+\+)/g, '<span class="metric">$1</span>');
+---
+
+<div class="experience-item relative border-l border-line pb-8 pl-7 last:pb-0">
+  <span
+    class="absolute top-1.5 left-[-5px] h-2.5 w-2.5 rounded-full border-2 border-accent bg-paper"
+  ></span>
+  <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+    <h3 class="font-display text-lg font-semibold leading-snug">
+      {job.role} <span class="text-muted">at</span>{' '}
+      <span class="text-accent">{job.company}</span>
+    </h3>
+    <span class="font-mono text-xs whitespace-nowrap text-muted">
+      {job.start} – {job.end}
+    </span>
+  </div>
+  {job.location && <p class="mt-0.5 font-mono text-[11px] text-muted">{job.location}</p>}
+  {job.summary && (
+    <p class="mt-2.5 text-sm leading-relaxed text-ink/85" set:html={highlight(job.summary)} />
+  )}
+  {job.highlights.length > 0 && (
+    <ul class="mt-2.5 space-y-1.5">
+      {job.highlights.map((item) => (
+        <li class="relative pl-4 text-sm leading-relaxed text-ink/85">
+          <span class="absolute top-[0.55em] left-0 h-1 w-1 rounded-full bg-accent"></span>
+          <span set:html={highlight(item)} />
+        </li>
+      ))}
+    </ul>
+  )}
+  {job.tech.length > 0 && (
+    <p class="mt-3 font-mono text-[11px] tracking-wide text-muted">
+      {job.tech.join('  ·  ')}
+    </p>
+  )}
+</div>

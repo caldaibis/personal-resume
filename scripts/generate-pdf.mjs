@@ -28,6 +28,7 @@ try {
     path: outFile,
     format: 'A4',
     printBackground: true,
+    tagged: true,
     margin: { top: '0', bottom: '0', left: '0', right: '0' },
   });
   console.log(`✓ PDF written to ${outFile}`);

@@ -3,7 +3,7 @@ import { z } from 'zod';
 /**
  * The single source of truth for the *shape* of a resume.
  * Content lives in `resume.ts` and is validated against this schema
- * at build time, so a typo or missing field fails the build — not the page.
+ * at build time, so a typo or missing field fails the build, not the page.
  */
 
 export const linkSchema = z.object({
@@ -29,6 +29,11 @@ export const projectSchema = z.object({
   tech: z.array(z.string()).default([]),
 });
 
+export const skillGroupSchema = z.object({
+  group: z.string(),
+  items: z.array(z.string()),
+});
+
 export const certificationSchema = z.object({
   name: z.string(),
   issuer: z.string(),
@@ -52,6 +57,7 @@ export const resumeSchema = z.object({
   email: z.string().email(),
   links: z.array(linkSchema).default([]),
   experience: z.array(experienceSchema).default([]),
+  skills: z.array(skillGroupSchema).default([]),
   projects: z.array(projectSchema).default([]),
   education: z.array(educationSchema).default([]),
   certifications: z.array(certificationSchema).default([]),
