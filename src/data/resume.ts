@@ -95,7 +95,7 @@ const data: Resume = {
     },
     {
       company: 'Yard (Digital Agency)',
-      role: 'Full-Stack Software Engineer (0.4 FTE)',
+      role: 'Full-Stack Software Engineer',
       location: 'Utrecht, Netherlands',
       start: '2018',
       end: '2020',
@@ -148,7 +148,7 @@ const data: Resume = {
     {
       institution: 'Utrecht University',
       degree: 'MSc, Computing Science',
-      start: '2018',
+      start: '2020',
       end: '2022',
       details:
         'Master’s thesis “Investigating relaxed probability updating games” (grade 8.2). Coursework: advanced machine learning, data mining, pattern recognition, evolutionary computing, multi-agent learning, network science.',
