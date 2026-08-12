@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { ImageMetadata } from 'astro';
 
 /**
  * The single source of truth for the *shape* of a resume.
@@ -34,6 +35,16 @@ export const skillGroupSchema = z.object({
   items: z.array(z.string()),
 });
 
+export const imageMetadataSchema = z.custom<ImageMetadata>(
+  (value) =>
+    typeof value === 'object' &&
+    value !== null &&
+    'src' in value &&
+    'width' in value &&
+    'height' in value &&
+    'format' in value,
+);
+
 export const certificationSchema = z.object({
   name: z.string(),
   issuer: z.string(),
@@ -53,6 +64,7 @@ export const resumeSchema = z.object({
   name: z.string(),
   title: z.string(),
   summary: z.string(),
+  photo: imageMetadataSchema.optional(),
   location: z.string().optional(),
   email: z.string().email(),
   links: z.array(linkSchema).default([]),

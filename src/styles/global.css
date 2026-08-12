@@ -95,6 +95,11 @@ body {
   .resume-title {
     letter-spacing: 0 !important;
   }
+  .profile-photo {
+    height: 6.5rem !important;
+    width: 6.5rem !important;
+    box-shadow: none !important;
+  }
   section {
     margin-top: 1.25rem !important;
   }

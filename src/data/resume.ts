@@ -1,4 +1,5 @@
 import { resumeSchema, type Resume } from './schema';
+import profilePhoto from '../assets/professional-profile-picture.png';
 
 /**
  * ✏️  EDIT THIS FILE: it is your resume.
@@ -9,6 +10,7 @@ const data: Resume = {
   title: 'Freelance AI & Software Engineer',
   summary:
     'Freelance AI and software engineer with an MSc in Computing Science and 5+ years of experience taking user-facing systems from research and model development through deployment and production support. I combine hands-on ML and LLM work with full-stack engineering, cloud infrastructure, and close collaboration with stakeholders and domain experts.',
+  photo: profilePhoto,
   location: 'Utrecht, Netherlands',
   email: 'caldaibis@gmail.com',
   links: [

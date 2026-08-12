@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
 import Section from '../components/Section.astro';
 import SkillsSection from '../components/SkillsSection.astro';
+import { Image } from 'astro:assets';
 import { resume } from '../data/resume';
 
 // Signature device: emphasise quantified results (percentages, "40+") inline.
@@ -23,7 +24,7 @@ const continuedExperience = resume.experience.slice(2);
       <div class="p-8 sm:p-12">
         <!-- Header -->
         <header>
-          <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div class="flex items-start justify-between gap-5 sm:gap-8">
             <div>
               <h1 class="font-display text-4xl font-bold leading-none tracking-tight sm:text-[3.25rem]">
                 {resume.name}
@@ -32,6 +33,44 @@ const continuedExperience = resume.experience.slice(2);
                 {resume.title}
               </p>
             </div>
+            {resume.photo && (
+              <Image
+                src={resume.photo}
+                alt={`${resume.name}, ${resume.title}`}
+                width={224}
+                height={224}
+                format="webp"
+                quality="high"
+                layout="fixed"
+                priority
+                class="profile-photo h-24 w-24 shrink-0 rounded-sm border border-line object-cover shadow-sm sm:h-28 sm:w-28"
+              />
+            )}
+          </div>
+
+          <p class="mt-6 max-w-prose leading-relaxed text-ink/85" set:html={highlight(resume.summary)} />
+
+          <!-- Contact / links -->
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-4">
+            <ul class="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-muted">
+              {resume.location && <li>{resume.location}</li>}
+              <li aria-hidden="true" class="text-line">/</li>
+              <li>
+                <a class="text-ink transition-colors hover:text-accent" href={`mailto:${resume.email}`}>
+                  {resume.email}
+                </a>
+              </li>
+              {resume.links.map((link) => (
+                <>
+                  <li aria-hidden="true" class="text-line">/</li>
+                  <li>
+                    <a class="text-ink transition-colors hover:text-accent" href={link.url} target="_blank" rel="noopener">
+                      {link.label}
+                    </a>
+                  </li>
+                </>
+              ))}
+            </ul>
             <a
               href="/resume.pdf"
               class="no-print inline-flex w-fit shrink-0 items-center gap-2 border border-ink px-3.5 py-2 font-mono text-xs font-medium tracking-wide text-ink transition-colors hover:bg-ink hover:text-paper"
@@ -39,29 +78,6 @@ const continuedExperience = resume.experience.slice(2);
               ↓ resume.pdf
             </a>
           </div>
-
-          <p class="mt-6 max-w-prose leading-relaxed text-ink/85" set:html={highlight(resume.summary)} />
-
-          <!-- Contact / links -->
-          <ul class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-muted">
-            {resume.location && <li>{resume.location}</li>}
-            <li aria-hidden="true" class="text-line">/</li>
-            <li>
-              <a class="text-ink transition-colors hover:text-accent" href={`mailto:${resume.email}`}>
-                {resume.email}
-              </a>
-            </li>
-            {resume.links.map((link) => (
-              <>
-                <li aria-hidden="true" class="text-line">/</li>
-                <li>
-                  <a class="text-ink transition-colors hover:text-accent" href={link.url} target="_blank" rel="noopener">
-                    {link.label}
-                  </a>
-                </li>
-              </>
-            ))}
-          </ul>
         </header>
 
         <!-- Experience -->
